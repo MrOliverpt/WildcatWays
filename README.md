@@ -1,5 +1,5 @@
 # WildcatWays
-Project Name: WildCatWays
+WildCatWays
 
 Group 5
 
