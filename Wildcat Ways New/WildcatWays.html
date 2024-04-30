@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Wildcat Ways</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 370px; bottom: 0; width: 80%; height: 85%}
+</style>
+</head>
+<body>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.3.1/mapbox-gl-directions.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.3.1/mapbox-gl-directions.css" type="text/css">
+<link rel="stylesheet" href="style.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="header">
+    <h1>
+      Wildcat Ways 
+      <img src="logo.png" alt="Wildcat Ways Logo" style="width: 50px; height: auto;">
+    </h1>
+    <p>Find the fastest path through Davidson College's campus!</p>
+  </div>
+  <input type="text" id="startingPoint" placeholder="Please Enter Your Staring Point"> 
+  <input type="text" id="destination" placeholder="Please Enter Your Destination">
+  <button id="addDestinationButton">+</button>
+  <button id="calculateButton">Find Optimal Path <img src="logo2.png" alt="Wildcat Ways Logo" style="width: 30px; height: auto;"></button>
+  <div id="shortestPath">
+</div>
+<div id="map"></div>
+<div class="sidebar">
+    <div class="dropdown-container">
+      <div class="dropdown">
+        <button class="dropbtn">Academics</button>
+        <div class="dropdown-content">
+          <a href="#">Chambers</a>
+          <a href="#">Dana</a>
+          <a href="#">E.H. Little Library</a>
+          <a href="#">Hurt Hub</a>
+          <a href="#">Sloan</a>
+          <a href="#">Wall</a>
+          <a href="#">Watson</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Administration</button>
+        <div class="dropdown-content">
+          <a href="#">Admissions and Financial Aid</a>
+          <a href="#">AADR</a>
+          <a href="#">HR</a>
+          <a href="#">ISP</a>
+          <a href="#">Registrar</a>
+          <a href="#">RLO</a>
+          <a href="#">T&I</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Arts</button>
+        <div class="dropdown-content">
+          <a href="#">Sloan Music Center</a>
+          <a href="#">VAC</a>
+          <a href="#">Cunningham Theatre</a>
+          <a href="#">Duke Family Performance Hall</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Athletics</button>
+        <div class="dropdown-content">
+          <a href="#">Doe Weight Room</a>
+          <a href="#">Chidsey Gym</a>
+          <a href="#">Union Gym</a>
+          <a href="#">IM Fields</a>
+          <a href="#">Field 76</a>
+          <a href="#">Game Changers Field House</a>
+          <a href="#">Baker Sports Complex</a>
+          <a href="#">Richardson Stadium</a>
+          <a href="#">Alumni Stadium</a>
+          <a href="#">Wilson Field</a>
+          <a href="#">Carol Grotnes Belk Turf Field</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Dining</button>
+        <div class="dropdown-content">
+          <a href="#">Commons</a>
+          <a href="#">Davis Cafe</a>
+          <a href="#">Nummit</a>
+          <a href="#">Wildcat Den</a>
+          <a href="#">Qdoba</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Dorms</button>
+        <div class="dropdown-content">
+          <a href="#">Belk</a>
+          <a href="#">Rich</a>
+          <a href="#">Little</a>
+          <a href="#">Watts</a>
+          <a href="#">Chidsey</a>
+          <a href="#">Cannon</a>
+          <a href="#">Sentelle</a>
+          <a href="#">Duke</a>
+          <a href="#">Irwin</a>
+          <a href="#">Akers</a>
+          <a href="#">Knox</a>
+          <a href="#">Flowe</a>
+          <a href="#">Davis</a>
+          <a href="#">Daley</a>
+          <a href="#">Hart</a>
+          <a href="#">Jamie</a>
+          <a href="#">Ryburn</a>
+          <a href="#">F</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Patterson Court</button>
+        <div class="dropdown-content">
+          <a href="#">KSIG</a>
+          <a href="#">SAE</a>
+          <a href="#">FIJI</a>
+          <a href="#">PHI DELT</a>
+          <a href="#">Warner</a>
+          <a href="#">Rusk</a>
+          <a href="#">Connor</a>
+          <a href="#">Turner</a>
+          <a href="#">Spencer-Weinstein Center</a>
+          <a href="#">BSC</a>
+          <a href="#">PASA X OLAS</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Student Life</button>
+        <div class="dropdown-content">
+          <a href="#">Davidson Outdoors</a>
+          <a href="#">Student Activities</a>
+          <a href="#">Union</a>
+          <a href="#">Old Tennis Court</a>
+        </div>
+      </div>
+    </div>
+</div>
+<script src="main.js"></script>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1Ijoid2lsZGNhdHdheXMiLCJhIjoiY2x1dmc2cWhiMDMzcDJxcGJ2eDM4c2NzMiJ9.vEGOsREZFp6RC4ow9NSnrw';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        zoom: 16,
+        center: [-80.8427, 35.5016]
+    });
+
+    map.addControl(
+        new MapboxDirections({
+            accessToken: mapboxgl.accessToken,
+            profile: 'mapbox/walking'
+        }),
+        'top-right'
+    );
+
+    map.addControl(
+        new mapboxgl.NavigationControl(), 'top-right'
+    );
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+        const start = [position.coords.longitude, position.coords.latitude];
+        map.setCenter(start); // Center the map on the user's location
+        addStartMarker(start); // Add marker for the starting point
+    }, function(error) {
+        console.error('Error getting current location:', error);
+    });
+
+    // Function to add a marker for the starting point
+    function addStartMarker(start) {
+        map.addLayer({
+            id: 'point',
+            type: 'circle',
+            source: {
+                type: 'geojson',
+                data: {
+                    type: 'FeatureCollection',
+                    features: [
+                        {
+                            type: 'Feature',
+                            properties: {},
+                            geometry: {
+                                type: 'Point',
+                                coordinates: start
+                            }
+                        }
+                    ]
+                }
+            },
+            paint: {
+                'circle-radius': 10,
+                'circle-color': '#D42121'
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>

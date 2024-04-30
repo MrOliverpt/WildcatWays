@@ -1,0 +1,123 @@
+.sidebar {
+    width: 0px; /* Adjust the width as needed */
+    left: 700px;
+    position: fixed; /* Fix the sidebar position */
+    right: 0; /* Position it on the far right */
+    top: 250px;
+    background-color: #f1f1f1;
+    height: 100%; /* Adjust the height as needed */
+}
+
+.dropdown-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+}
+
+.dropbtn {
+    background-color: #d42121;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    font-family: sans-serif;
+    border: none;
+    cursor: pointer;
+    flex: 1; /* Make all buttons equally flexible */
+    min-width: 160px; /* Set minimum width for buttons */
+    text-align: center; /* Center text horizontally */
+}
+
+.dropdown {
+    position: relative;
+    margin-bottom: 10px; /* Add margin between dropdowns */
+    font-family: sans-serif;
+    left: 500px; /* Adjust as needed */
+    top: 0px; /* Center vertically */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 10;
+    top: 100%;
+    font-family: sans-serif;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    max-height: 200px; /* Set maximum height for scrolling */
+    overflow-y: auto; /* Add vertical scroll when content exceeds max height */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #0F1012;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #d42121;
+    font-weight: bold;
+    color: white;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #0F1012;
+    font-weight: bold;
+}
+
+.header{
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    background-color: #d42121;
+    margin-left: 400px;
+    margin-right: 400px;
+    padding:5px;
+}
+
+#startingPoint,
+#destination {
+    width: 250px; /* Adjust the width as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    padding: 10px; /* Adjust the padding as needed */
+    margin-bottom: 10px; /* Adjust the margin as needed */
+    border: 2px solid #ccc; /* Add a 2px solid border with a light gray color */
+    border-radius: 5px; /* Optional: Add border radius for rounded corners */
+}
+#addDestinationButton{
+    width:40px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.destination-input{
+    width: 250px;
+    font-size: 16px; /* Adjust the font size as needed */
+    padding: 10px; /* Adjust the padding as needed */
+    margin-bottom: 10px; /* Adjust the margin as needed */
+    border: 2px solid #ccc; /* Add a 2px solid border with a light gray color */
+    border-radius: 5px; /* Optional: Add border radius for rounded corners */
+}
+
+#calculateButton{
+    width: 250px; /* Adjust the width as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    padding: 10px; /* Adjust the padding as needed */
+    margin-bottom: 10px; /* Adjust the margin as needed */
+    border: 2px solid #ccc; /* Add a 2px solid border with a light gray color */
+    border-radius: 5px; /* Optional: Add border radius for rounded corners */
+}
+
+#calculateButton:hover {
+    background-color: green;
+    color: white;
+}
+
+.logo{
+    size: 10px;
+}
